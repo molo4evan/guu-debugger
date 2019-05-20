@@ -19,11 +19,6 @@ class Debugger(private val filename: String) {
     }
 
     private lateinit var interpreter: Interpreter
-    var stackDepth: Int
-    get() = interpreter.stackDepth
-    set(value){
-        interpreter.stackDepth = value
-    }
 
     private val commands = mapOf(
         "i" to StepInto(),
@@ -33,10 +28,11 @@ class Debugger(private val filename: String) {
         "e" to Exit()
     )
 
-    fun start(){
+    fun start(stackDepth: Int = 1000){
         printGreeting()
         try {
             interpreter = Interpreter(filename)
+            interpreter.stackDepth = stackDepth
         } catch (ex: ParserException){
             println("Sorry, there is syntax exception in script")
             return
@@ -88,7 +84,7 @@ class Debugger(private val filename: String) {
     }
 
     private fun printInfo(){
-        println("Current stack depth is $stackDepth")
+        println("Current stack depth is ${interpreter.stackDepth}")
     }
 
     private fun printCurrentLine(){

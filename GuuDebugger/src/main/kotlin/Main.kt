@@ -13,12 +13,13 @@ fun main(args: Array<String>) {
         if (args.size >= 3 && args[1] == "-s"){
             try {
                 val depth = args[2].toInt()
-                d.stackDepth = depth
+                d.start(depth)
             } catch (e: NumberFormatException){
                 println("ERROR: stack depth must be integer")
                 return
             }
+        } else {
+            d.start()
         }
-        d.start()
     }
 }

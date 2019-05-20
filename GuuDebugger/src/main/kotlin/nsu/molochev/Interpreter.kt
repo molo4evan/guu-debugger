@@ -65,7 +65,7 @@ class Interpreter(filename: String) {
             is FunctionCall -> {
                 if (!passFunctions){
                     ++currentDepth
-                    if (currentDepth > stackDepth){
+                    if (currentDepth >= stackDepth){
                         throw StackOverflowException(stackDepth)
                     }
                     callIndex = currentIndex

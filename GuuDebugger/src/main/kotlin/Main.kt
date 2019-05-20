@@ -13,9 +13,10 @@ fun main(args: Array<String>) {
         if (args.size >= 3 && args[1] == "-s"){
             try {
                 val depth = args[2].toInt()
+                if (depth < 1) throw NumberFormatException()
                 d.start(depth)
             } catch (e: NumberFormatException){
-                println("ERROR: stack depth must be integer")
+                println("ERROR: stack depth must be integer (>= 1)")
                 return
             }
         } else {
